@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sticky应用</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px 0px #000;
+            z-index: 1;
+            height: 50px;
+        }
+
+        .container {
+            /* overflow: auto scroll hidden;   */
+            /* sticky的父元素的overflow只能是 visible */
+        }
+
+        .item {
+            position: sticky;
+            top: 50px;
+            width: 100%;
+            height: 50vh;
+            box-shadow: 0 0 10px 0px #000;
+        }
+
+        h1 {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>导航栏</nav>
+    <div class="container">
+        <div class="item" style="background-color: lightblue;">
+            <header>
+                <h1>标题</h1>
+            </header>
+            <main>
+                <p>内容区域</p>
+            </main>
+        </div>
+        <div class="item" style="background-color: lightcoral;">
+            <header>
+                <h1>标题2</h1>
+            </header>
+            <main>
+                <p>内容区域2</p>
+            </main>
+        </div>
+        <div class="item" style="background-color: lightslategray;">
+            <header>
+                <h1>标题3</h1>
+            </header>
+            <main>
+                <p>内容区域3</p>
+            </main>
+        </div>
+        <div class="item" style="background-color: lightpink;">
+            <header>
+                <h1>标题4</h1>
+            </header>
+            <main>
+                <p>内容区域4</p>
+            </main>
+        </div>
+        <div class="item" style="background-color: lightseagreen;">
+            <header>
+                <h1>标题5</h1>
+            </header>
+            <main>
+                <p>内容区域5</p>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
