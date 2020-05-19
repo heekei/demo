@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuex应用</title>
+</head>
+
+<body>
+    <div id="app">
+        {{ message }}
+        {{ count }}
+        {{ $store.state.count }}
+        <br>
+        <button @click="increment">自增1</button>
+        <button @click="incrementByAmount(10)">自增10</button>
+        <button @click="add">异步自增1</button>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vuex"></script>
+    <script>
+        const store = new Vuex.Store({
+            state: {
+                count: 0
+            },
+            mutations: {
+                increment(state) {
+                    state.count += 1
+                },
+                incrementBy(state, payload) {
+                    state.count += payload.amount
+                },
+                incrementByAmount(state, amount) {
+                    state.count += amount
+                }
+            },
+            actions: {
+                actionIncrement(context) {
+                    setTimeout(() => {
+                        context.commit('increment')
+                    }, 1000);
+                }
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+            store,
+            data: {
+                message: 'Hello Vuex!'
+            },
+            computed: {
+                ...Vuex.mapState([
+                    'count'
+                ])
+                // count() {
+                //     // return store.state.count
+                //     return this.$store.state.count
+                // }
+            },
+            created() {
+                // console.log('store.state: ', store.state);
+            },
+            methods: {
+                doMutation() {
+                    // store.commit('increment')
+                    store.commit({
+                        type: 'incrementBy',
+                        amount: 10
+                    })
+                },
+                ...Vuex.mapActions({
+                    add: 'actionIncrement' // 将 `this.add()` 映射为 `this.$store.dispatch('increment')`
+                }),
+                ...Vuex.mapMutations([
+                    'increment', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+
+                    // `mapMutations` 也支持载荷：
+                    'incrementByAmount' // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
+                ])
+            }
+        })
+    </script>
+</body>
+
+</html>
