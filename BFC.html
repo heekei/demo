@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFC测试</title>
+    <style>
+        .parent {
+            overflow: hidden;
+        }
+
+        .float {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <img src='https://raw.githubusercontent.com/heekei/own-image-storage/master/20200720153149.png'
+        onload="count(event)">
+    <p>我是超长的文字</p>
+    <div class='parent'>
+        <div class='float'>浮动元素</div>
+        <div>普通元素</div>
+    </div>
+    <script>
+        function count(e) {
+            console.log('图片加载耗时', e.timeStamp);
+        }
+        setTimeout(() => {
+            console.log('白屏时间', performance.timing.domComplete - performance.timing.navigationStart)
+        }, 1000);
+
+    </script>
+</body>
+
+</html>
