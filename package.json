@@ -1,0 +1,22 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heekei/demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heekei/demo/issues"
+  },
+  "homepage": "https://github.com/heekei/demo#readme",
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
+}
