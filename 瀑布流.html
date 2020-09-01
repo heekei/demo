@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瀑布流</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            /* column-count: 2;
+            column-gap: 0; */
+
+        }
+
+        .container {
+            display: flex;
+            flex-flow: column wrap;
+            height: 1600px;
+            width: 620px;
+            /* float: left; */
+        }
+
+        .container::before,
+        .container::after {
+            content: "";
+            flex-basis: 100%;
+            width: 0;
+            order: 1;
+            border-left: 1px solid #ccc;
+        }
+
+        div.item {
+            /* float: left; */
+            width: 300px;
+            margin: 5px;
+            border: 1px solid #000;
+            /* break-inside: avoid; */
+            box-sizing: border-box;
+            /* padding: 10px; */
+
+        }
+
+        .item:nth-child(2n+1) {
+            order: 1;
+        }
+
+        .item:nth-child(2n+2) {
+            order: 2;
+        }
+
+        /* 
+        .item:nth-child(3n+1) {
+            order: 1;
+        }
+
+        .item:nth-child(3n+2) {
+            order: 2;
+        }
+        .item:nth-child(3n) {
+            order: 3;
+        } */
+        button {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button onclick="add()">添加</button>
+        <!-- <div class="item" style="height:300px;"></div>
+        <div class="item" style="height:320px;"></div>
+        <div class="item" style="height:350px;"></div>
+        <div class="item" style="height:260px;"></div>
+        <div class="item" style="height:310px;"></div> -->
+    </div>
+    <script>
+        function createDOM() {
+            const min = 200;
+            const max = 300;
+            for (let i = 0; i < 20; i++) {
+                let d = document.createElement('div')
+                d.style.height = parseInt(Math.random() * (max - min + 1)) + min + 'px';
+                d.innerHTML = i
+                d.classList.add('item');
+                document.querySelector('.container').append(d);
+            }
+        }
+
+        function resizeCtnHeight() {
+            let heightArr = [];
+            const len = document.querySelectorAll('.item').length;
+            const col = Math.ceil(len / 2);// 单列最多
+            document.querySelectorAll('.item').forEach(em => {
+                const h = parseInt(em.style.height);
+                heightArr.push(h);
+            });
+            const ctnHeight = heightArr.sort((a, b) => b - a).slice(0, col).reduce((a, b) => a + b);
+            document.querySelector('.container').style.height = ctnHeight + 'px'
+        }
+        function add() {
+            createDOM();
+            resizeCtnHeight();
+        }
+        add();
+
+    </script>
+</body>
+
+</html>
